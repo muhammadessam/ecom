@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="844570c6-5526-4509-b6d7-e410afb93807" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +159,21 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\dev-ecom\public\admin" />
+      <recent name="C:\laragon\www\dev-ecom\resources\views\vendors" />
+      <recent name="C:\laragon\www\dev-ecom\resources\views\customers" />
+      <recent name="C:\laragon\www\dev-ecom\app\Http\Controllers\Vendor" />
+      <recent name="C:\laragon\www\dev-ecom\app\Http\Controllers\Customer" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\dev-ecom\app\Http\Controllers\Admin" />
+      <recent name="C:\laragon\www\dev-ecom\resources\views\admin" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -166,7 +183,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597078890701</updated>
-      <workItem from="1597078892229" duration="529000" />
+      <workItem from="1597078892229" duration="11491000" />
     </task>
     <servers />
   </component>
@@ -174,25 +191,45 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1597078998570">
+    <state x="2506" y="203" key="#Inspections" timestamp="1597080156149">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597078998570" />
-    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1597078998570">
+    <state x="2506" y="203" key="#Inspections/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080156149" />
+    <state x="2640" y="327" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1597095485859">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597078998570" />
-    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1597078998569">
+    <state x="2640" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597095485859" />
+    <state x="2610" y="280" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1597079587422">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597078998569" />
-    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1597078998570">
+    <state x="2610" y="280" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597079587422" />
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1597080951876">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597078998570" />
-    <state x="2543" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1597079417512">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080951876" />
+    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1597080951876">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="2543" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597079417512" />
+    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080951876" />
+    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1597080951876">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080951876" />
+    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1597080951876">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080951876" />
+    <state x="2714" y="448" key="NewPhpFileDialog" timestamp="1597080492937">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2714" y="448" key="NewPhpFileDialog/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597080492937" />
+    <state x="2536" y="243" key="run.anything.popup" timestamp="1597095765750">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2536" y="243" key="run.anything.popup/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597095765750" />
+    <state x="2543" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1597095746777">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="2543" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1597095746777" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Admin;
 class AdminSeeder extends Seeder
 {
     /**
@@ -21,6 +21,6 @@ class AdminSeeder extends Seeder
             ],
         ];
 
-        \App\Admin::insert($admins);
+        Admin::insert($admins);
     }
 }
