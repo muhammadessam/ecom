@@ -6,7 +6,7 @@
 <script src="{{asset('admin/assets/js/app.js')}}"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         App.init();
     });
 </script>
@@ -18,22 +18,23 @@
 <script src="{{asset('admin/assets/js/dashboard/dash_1.js')}}"></script>
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 <script src="{{asset('admin/plugins/table/datatable/datatables.js')}}"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('admin/plugins/table/datatable/button-ext/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('admin/plugins/table/datatable/button-ext/jszip.min.js')}}"></script>
+<script src="{{asset('admin/plugins/table/datatable/button-ext/buttons.html5.min.js')}}"></script>
+<script src="{{asset('admin/plugins/table/datatable/button-ext/buttons.print.min.js')}}"></script>
 <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+
 <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         let copyButtonTrans = '{{ trans('global.datatables.copy') }}'
         let csvButtonTrans = '{{ trans('global.datatables.csv') }}'
         let excelButtonTrans = '{{ trans('global.datatables.excel') }}'
@@ -44,14 +45,14 @@
         let selectNoneButtonTrans = '{{ trans('global.deselect_all') }}'
 
         let languages = {
-            'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
-            'ar': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json'
+            'en': '{{asset('admin/plugins/English.json')}}',
+            'ar': '{{asset('admin/plugins/Arabic.json')}}',
         };
 
-        $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, { className: 'btn' })
+        $.extend(true, $.fn.dataTable.Buttons.defaults.dom.button, {className: 'btn'})
         $.extend(true, $.fn.dataTable.defaults, {
             language: {
-                url: languages['{{ app()->getLocale() }}']
+                url: languages['{{ app()->getLocale() }}'],
             },
             columnDefs: [{
                 orderable: false,
@@ -63,7 +64,7 @@
                 targets: -1
             }],
             select: {
-                style:    'multi+shift',
+                style: 'multi+shift',
                 selector: 'td:first-child'
             },
             order: [],
@@ -78,10 +79,10 @@
                     exportOptions: {
                         columns: ':visible'
                     },
-                    action: function(e, dt) {
+                    action: function (e, dt) {
                         e.preventDefault()
                         dt.rows().deselect();
-                        dt.rows({ search: 'applied' }).select();
+                        dt.rows({search: 'applied'}).select();
                     }
                 },
                 {
@@ -140,10 +141,28 @@
                         columns: ':visible'
                     }
                 }
-            ]
+            ],
         });
-        $.fn.dataTable.ext.classes.sPageButton = '';
+        $.fn.dataTable.ext.classes.sPageButton = 'paginate_button page-item';
     });
 
 </script>
 @yield('scripts')
+<style>
+    .dt-buttons {
+        display: inline-flex;
+    }
+
+    .dataTables_length {
+        display: inline-flex;
+    }
+
+    .dataTables_filter {
+        display: inline-flex;
+        float: right;
+    }
+    .dataTables_paginate{
+        display: inline-flex;
+        float: right;
+    }
+</style>
