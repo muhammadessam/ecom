@@ -1,3 +1,3 @@
 <?php
 
-Route::redirect('/', '/admin/login');
+Route::redirect('/', '/admin/home');

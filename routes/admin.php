@@ -1,7 +1,7 @@
 <?php
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'],function(){
+Route::group(['prefix' => 'admins', 'as' => 'admin.', 'namespace' => 'Auth'],function(){
 
     //Login Routes
     Route::get('/login','LoginController@showLoginForm')->name('login');
@@ -19,9 +19,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'],func
 });
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
+Route::group(['prefix' => 'admins', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
 
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index')->name('home');
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
