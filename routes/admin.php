@@ -1,7 +1,7 @@
 <?php
 
 
-Route::group(['prefix' => 'admins', 'as' => 'admin.', 'namespace' => 'Auth'],function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'],function(){
 
     //Login Routes
     Route::get('/login','LoginController@showLoginForm')->name('login');
