@@ -1,25 +1,25 @@
 <?php
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'],function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Auth'], function () {
 
     //Login Routes
-    Route::get('/login','LoginController@showLoginForm')->name('login');
-    Route::post('/login','LoginController@login');
-    Route::post('/logout','LoginController@logout')->name('logout');
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'LoginController@login');
+    Route::post('/logout', 'LoginController@logout')->name('logout');
 
     //Forgot Password Routes
-    Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 
     //Reset Password Routes
-    Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+    Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.update');
 
 });
 
 
-Route::group(['prefix' => 'admins', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth:admin']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     // Permissions
@@ -110,8 +110,8 @@ Route::group(['prefix' => 'admins', 'as' => 'admin.', 'middleware' => ['auth:adm
     Route::resource('gifts-categories', 'GiftsCategoryController');
 
     // Cift Cards
-    Route::delete('cift-cards/destroy', 'CiftCardController@massDestroy')->name('cift-cards.massDestroy');
-    Route::resource('cift-cards', 'CiftCardController');
+    Route::delete('gift-cards/destroy', 'GiftCardController@massDestroy')->name('cift-cards.massDestroy');
+    Route::resource('gift-cards', 'GiftCardController');
 
     // Gift Card Usages
     Route::delete('gift-card-usages/destroy', 'GiftCardUsageController@massDestroy')->name('gift-card-usages.massDestroy');
@@ -193,10 +193,10 @@ Route::group(['prefix' => 'admins', 'as' => 'admin.', 'middleware' => ['auth:adm
 });
 
 
-//Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
-//// Change password
-//    if (file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php'))) {
-//        Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
-//        Route::post('password', 'ChangePasswordController@update')->name('password.update');
-//    }
-//});
+Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
+// Change password
+    if (file_exists(app_path('Http/Controllers/Admin/Auth/ChangePasswordController.php'))) {
+        Route::get('password', 'ChangePasswordController@edit')->name('password.edit');
+        Route::post('password', 'ChangePasswordController@update')->name('password.update');
+    }
+});

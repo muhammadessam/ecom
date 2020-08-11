@@ -3,11 +3,10 @@
 
     <nav id="sidebar">
         <div class="shadow-bottom"></div>
-        <ul class="list-unstyled menu-categories" id="accordionExample">
-
+        <ul class="list-unstyled menu-categories" id="dashboard">
 
             <li class="menu">
-                <a href="{{route('admin.home')}}" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{route('admin.home')}}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -20,685 +19,532 @@
                 </a>
             </li>
 
-            <li class="menu">
-                <a href="#" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-cpu">
-                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
-                            <rect x="9" y="9" width="6" height="6"></rect>
-                            <line x1="9" y1="1" x2="9" y2="4"></line>
-                            <line x1="15" y1="1" x2="15" y2="4"></line>
-                            <line x1="9" y1="20" x2="9" y2="23"></line>
-                            <line x1="15" y1="20" x2="15" y2="23"></line>
-                            <line x1="20" y1="9" x2="23" y2="9"></line>
-                            <line x1="20" y1="14" x2="23" y2="14"></line>
-                            <line x1="1" y1="9" x2="4" y2="9"></line>
-                            <line x1="1" y1="14" x2="4" y2="14"></line>
-                        </svg>
-                        <span>{{ trans('cruds.userManagement.title') }}</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             class="feather feather-chevron-right">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </div>
-                </a>
-                <ul class="{{ request()->is('admin/permissions*') ? 'show' : '' }} {{ request()->is('admin/roles*') ? 'show' : '' }} {{ request()->is('admin/users*') ? 'show' : '' }} {{ request()->is('admin/audit-logs*') ? 'show' : '' }} submenu list-unstyled" id="app" data-parent="#accordionExample">
-                    @can('permission_access')
-                        <li class="{{request()->routeIs('admin.permissions.*') ? 'active' : ''}}">
-                            <a href="{{ route("admin.permissions.index") }}">
-                                {{ trans('cruds.permission.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('role_access')
-                        <li class="{{request()->routeIs('admin.roles.*') ? 'active' : ''}}">
-                            <a href="{{ route("admin.roles.index") }}">
-                                <p>
-                                    {{ trans('cruds.role.title') }}
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('user_access')
-                        <li class="{{request()->routeIs('admin.users.*') ? 'active' : ''}}">
-                            <a href="{{ route("admin.users.index") }}">
-                                <p>
-                                    {{ trans('cruds.user.title') }}
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
-                    @can('audit_log_access')
-                        <li class="{{request()->routeIs('admin.audit-logs.*') ? 'active' : ''}}">
-                            <a href="{{ route("admin.audit-logs.index") }}">
-                                <p>
-                                    {{ trans('cruds.auditLog.title') }}
-                                </p>
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-
             @can('user_management_access')
-
-                <ul class="nav nav-treeview">
-
-                </ul>
+                <li class="menu">
+                    <a href="#app" id="user-management" data-toggle="collapse"
+                       aria-expanded="{{request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') || request()->routeIs('admin.permissions.*') || request()->routeIs('admin.audit-logs.*')?'true' : 'false'}}"
+                       class="dropdown-toggle">
+                        <div class="">
+                            <i class="fa-fw nav-icon fas fa-users"></i>
+                            <span>{{ trans('cruds.userManagement.title') }}</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="{{ request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') || request()->routeIs('admin.permissions.*') || request()->routeIs('admin.audit-logs.*') ? 'show' : '' }} collapse submenu list-unstyled"
+                        id="app" data-parent="#user-management">
+                        @can('permission_access')
+                            <li class="{{request()->routeIs('admin.permissions.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.permissions.index") }}">{{ trans('cruds.permission.title') }}</a>
+                            </li>
+                        @endcan
+                        @can('role_access')
+                            <li class="{{request()->routeIs('admin.roles.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.roles.index") }}">{{ trans('cruds.role.title') }}</a>
+                            </li>
+                        @endcan
+                        @can('user_access')
+                            <li class="{{request()->routeIs('admin.users.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.users.index") }}">{{ trans('cruds.user.title')}}</a>
+                            </li>
+                        @endcan
+                        @can('audit_log_access')
+                            <li class="{{request()->routeIs('admin.audit-logs.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.audit-logs.index") }}">{{ trans('cruds.auditLog.title') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
                 </li>
             @endcan
+
             @can('product_management_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/product-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/product-tags*') ? 'menu-open' : '' }} {{ request()->is('admin/product-statuses*') ? 'menu-open' : '' }} {{ request()->is('admin/product-attributes*') ? 'menu-open' : '' }} {{ request()->is('admin/product-attribute-values*') ? 'menu-open' : '' }} {{ request()->is('admin/products*') ? 'menu-open' : '' }} {{ request()->is('admin/product-reviews*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-shopping-cart">
-
-                        </i>
-                        <p>
-                            {{ trans('cruds.productManagement.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                <li class="menu">
+                    <a href="#products" id="product-management" data-toggle="collapse"
+                       aria-expanded="{{request()->routeIs('admin.product-categories.*') || request()->routeIs('admin.product-tags.*') || request()->routeIs('admin.products.*') || request()->routeIs('admin.product-attribute-values.*') || request()->routeIs('admin.product-attributes.*') || request()->routeIs('admin.product-reviews.*' ? '' :'') ?'true' :'false'}}"
+                       class="dropdown-toggle collapsed">
+                        <div class="">
+                            <i class="fa-fw nav-icon fas fa-cart-arrow-down"></i>
+                            <span>{{ trans('cruds.productManagement.title') }}</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="{{request()->routeIs('admin.product-categories.*') || request()->routeIs('admin.product-tags.*') || request()->routeIs('admin.products.*') || request()->routeIs('admin.product-attribute-values.*') || request()->routeIs('admin.product-attributes.*') || request()->routeIs('admin.product-reviews.*') ? 'show' :''}} submenu list-unstyled collapse"
+                        id="products" data-parent="#product-management">
                         @can('product_category_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-categories.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-categories') || request()->is('admin/product-categories/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-folder">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productCategory.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-categories.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-categories.index") }}">
+                                    {{ trans('cruds.productCategory.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_tag_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-tags.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-tags') || request()->is('admin/product-tags/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-folder">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productTag.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-tags.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-tags.index") }}">
+                                    {{ trans('cruds.productTag.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_status_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-statuses.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-statuses') || request()->is('admin/product-statuses/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-folder">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productStatus.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-statuses.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-statuses.index") }}">
+                                    {{ trans('cruds.productStatus.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_attribute_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-attributes.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-attributes') || request()->is('admin/product-attributes/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productAttribute.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-attributes.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-attributes.index") }}">
+                                    {{ trans('cruds.productAttribute.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_attribute_value_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-attribute-values.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-attribute-values') || request()->is('admin/product-attribute-values/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productAttributeValue.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-attribute-values.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-attribute-values.index") }}">
+                                    {{ trans('cruds.productAttributeValue.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.products.index") }}"
-                                   class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-shopping-cart">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.product.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.products.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.products.index") }}">
+                                    {{ trans('cruds.product.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('product_review_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.product-reviews.index") }}"
-                                   class="nav-link {{ request()->is('admin/product-reviews') || request()->is('admin/product-reviews/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon far fa-star">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.productReview.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.product-reviews.*') ? 'active' : ''}}">
+                                <a href="{{ route("admin.product-reviews.index") }}">
+                                    {{ trans('cruds.productReview.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('location_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/countries*') ? 'menu-open' : '' }} {{ request()->is('admin/cities*') ? 'menu-open' : '' }} {{ request()->is('admin/areas*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-street-view">
-
-                        </i>
-                        <p>
-                            {{ trans('cruds.location.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse" href="#locations"
+                       data-toggle="collapse" id="locations-container"
+                       aria-expanded="{{request()->routeIs('admin.countries.*') || request()->routeIs('admin.cities.*') || request()->routeIs('admin.areas.*') ? 'true' : 'false'}}">
+                        <div class="">
+                            <i class="fa-fw nav-icon fas fa-street-view"></i>
+                            <span>{{ trans('cruds.location.title') }}</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{request()->routeIs('admin.countries.*') || request()->routeIs('admin.cities.*') || request()->routeIs('admin.areas.*') ? 'show' : ''}}"
+                        id="locations" data-parent="#locations-container">
                         @can('country_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.countries.index") }}"
-                                   class="nav-link {{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-flag">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.country.title') }}
-                                    </p>
+                            <li class="{{ request()->is('admin/countries') || request()->is('admin/countries/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.countries.index") }}">
+                                    {{ trans('cruds.country.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('city_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.cities.index") }}"
-                                   class="nav-link {{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-map-marker-alt">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.city.title') }}
-                                    </p>
+                            <li class="{{ request()->is('admin/cities') || request()->is('admin/cities/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.cities.index") }}">
+                                    {{ trans('cruds.city.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('area_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.areas.index") }}"
-                                   class="nav-link {{ request()->is('admin/areas') || request()->is('admin/areas/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-map-pin">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.area.title') }}
-                                    </p>
+                            <li class="{{ request()->is('admin/areas') || request()->is('admin/areas/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.areas.index") }}">
+                                    {{ trans('cruds.area.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('client_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/customers*') ? 'menu-open' : '' }} {{ request()->is('admin/addresses*') ? 'menu-open' : '' }} {{ request()->is('admin/customer-devices*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-users">
-
-                        </i>
-                        <p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse" href="#clietns"
+                       data-toggle="collapse" id="clients-container"
+                       aria-expanded="{{request()->routeIs('admin.customers.*') || request()->routeIs('admin.addresses.*') || request()->routeIs('admin.customer-devices.*') ? 'true' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-users"></i>
                             {{ trans('cruds.client.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{ request()->routeIs('admin.customer-devices.*') || request()->routeIs('admin.customers.*')  || request()->routeIs('admin.addresses.*') ? 'show' : '' }}"
+                        id="clietns">
                         @can('customer_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.customers.index") }}"
-                                   class="nav-link {{ request()->is('admin/customers') || request()->is('admin/customers/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-users">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.customer.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.customers.index") }}">
+                                    {{trans('cruds.customer.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('address_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.addresses.index") }}"
-                                   class="nav-link {{ request()->is('admin/addresses') || request()->is('admin/addresses/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-street-view">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.address.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.addresses.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.addresses.index") }}">
+                                    {{ trans('cruds.address.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('customer_device_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.customer-devices.index") }}"
-                                   class="nav-link {{ request()->is('admin/customer-devices') || request()->is('admin/customer-devices/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-mobile-alt">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.customerDevice.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.customer-devices.*') ? 'active' : '' }}">
+                                <a href="{{route("admin.customer-devices.index") }}">
+                                    {{ trans('cruds.customerDevice.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('company_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/vendors*') ? 'menu-open' : '' }} {{ request()->is('admin/brands*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-building">
-
-                        </i>
-                        <p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#companies" data-toggle="collapse"
+                       aria-expanded="{{ request()->routeIs('admin.vendors.*') || request()->routeIs('admin.brands.*') ? 'true' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-building"></i>
                             {{ trans('cruds.company.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{ request()->routeIs('admin.vendors.*') || request()->routeIs('admin.brands.*') ? 'show' : '' }}"
+                        id="companies">
                         @can('vendor_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.vendors.index") }}"
-                                   class="nav-link {{ request()->is('admin/vendors') || request()->is('admin/vendors/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-shuttle-van">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.vendor.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.vendors.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.vendors.index") }}">
+                                    {{ trans('cruds.vendor.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('brand_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.brands.index") }}"
-                                   class="nav-link {{ request()->is('admin/brands') || request()->is('admin/brands/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon far fa-star">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.brand.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.brands.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.brands.index") }}">
+                                    {{ trans('cruds.brand.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('gift_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/gifts-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/cift-cards*') ? 'menu-open' : '' }} {{ request()->is('admin/gift-card-usages*') ? 'menu-open' : '' }} {{ request()->is('admin/coupon-usages*') ? 'menu-open' : '' }} {{ request()->is('admin/coupons*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-cogs">
-
-                        </i>
-                        <p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#gifts"
+                       data-toggle="collapse"
+                       aria-expanded="{{request()->routeIs('admin.gifts-categories.*') || request()->routeIs('admin.gift-cards.*') || request()->routeIs('admin.gift-card-usages.*') || request()->routeIs('admin.coupon-usages.*') || request()->routeIs('admin.coupons.*') ? 'true' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-cogs"></i>
                             {{ trans('cruds.gift.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{request()->routeIs('admin.gifts-categories.*') || request()->routeIs('admin.gift-cards.*') || request()->routeIs('admin.gift-card-usages.*') || request()->routeIs('admin.coupon-usages.*') || request()->routeIs('admin.coupons.*') ? 'show' : '' }} "
+                        id="gifts">
                         @can('gifts_category_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.gifts-categories.index") }}"
-                                   class="nav-link {{ request()->is('admin/gifts-categories') || request()->is('admin/gifts-categories/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-folder">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.giftsCategory.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.gifts-categories.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.gifts-categories.index") }}">
+                                    {{ trans('cruds.giftsCategory.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('cift_card_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.cift-cards.index") }}"
-                                   class="nav-link {{ request()->is('admin/cift-cards') || request()->is('admin/cift-cards/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-address-card">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.ciftCard.title') }}
-                                    </p>
+                            <li class=" {{ request()->routeIs('admin.gift-cards.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.gift-cards.index") }}">
+                                    {{ trans('cruds.ciftCard.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('gift_card_usage_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.gift-card-usages.index") }}"
-                                   class="nav-link {{ request()->is('admin/gift-card-usages') || request()->is('admin/gift-card-usages/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-credit-card">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.giftCardUsage.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.gift-card-usages.*') ? 'active' :''}}">
+                                <a href="{{ route("admin.gift-card-usages.index") }}">
+                                    {{ trans('cruds.giftCardUsage.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('coupon_usage_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.coupon-usages.index") }}"
-                                   class="nav-link {{ request()->is('admin/coupon-usages') || request()->is('admin/coupon-usages/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-hand-holding-usd">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.couponUsage.title') }}
-                                    </p>
+                            <li class=" {{ request()->routeIs('admin.coupon-usages.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.coupon-usages.index") }}">
+                                    {{ trans('cruds.couponUsage.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('coupon_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.coupons.index") }}"
-                                   class="nav-link {{ request()->is('admin/coupons') || request()->is('admin/coupons/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-star-half-alt">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.coupon.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.coupons.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.coupons.index") }}">
+                                    {{ trans('cruds.coupon.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
-            @can('purchase_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/order-statuses*') ? 'menu-open' : '' }} {{ request()->is('admin/orders*') ? 'menu-open' : '' }} {{ request()->is('admin/order-items*') ? 'menu-open' : '' }} {{ request()->is('admin/payment-methods*') ? 'menu-open' : '' }} {{ request()->is('admin/transactions*') ? 'menu-open' : '' }} {{ request()->is('admin/cart-items*') ? 'menu-open' : '' }} {{ request()->is('admin/carts*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-credit-card">
 
-                        </i>
-                        <p>
+            @can('purchase_access')
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#pruchase"
+                       data-toggle="collapse"
+                       aria-expanded="{{ request()->routeIs('admin.order-statuses.*') || request()->routeIs('admin.orders.*') || request()->routeIs('admin.order-items.*') || request()->routeIs('admin.payment-methods.*') || request()->routeIs('admin.transactions.*') || request()->routeIs('admin.cart-items.*') || request()->routeIs('admin.carts.*') ? 'ture' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-credit-card"></i>
                             {{ trans('cruds.purchase.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{ request()->routeIs('admin.order-statuses.*') || request()->routeIs('admin.orders.*') || request()->routeIs('admin.order-items.*') || request()->routeIs('admin.payment-methods.*') || request()->routeIs('admin.transactions.*') || request()->routeIs('admin.cart-items.*') || request()->routeIs('admin.carts.*') ? 'show' :'' }}"
+                        id="pruchase">
                         @can('order_status_access')
-                            <li class="nav-item">
+                            <li class="{{ request()->routeIs('admin.order-statuses.*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.order-statuses.index") }}"
                                    class="nav-link {{ request()->is('admin/order-statuses') || request()->is('admin/order-statuses/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.orderStatus.title') }}
-                                    </p>
+                                    {{ trans('cruds.orderStatus.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('order_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.orders.index") }}"
-                                   class="nav-link {{ request()->is('admin/orders') || request()->is('admin/orders/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cart-arrow-down">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.order.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.orders.index") }}">
+                                    {{ trans('cruds.order.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('order_item_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.order-items.index") }}"
-                                   class="nav-link {{ request()->is('admin/order-items') || request()->is('admin/order-items/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.orderItem.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.order-items.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.order-items.index") }}">
+                                    {{ trans('cruds.orderItem.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('payment_method_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.payment-methods.index") }}"
-                                   class="nav-link {{ request()->is('admin/payment-methods') || request()->is('admin/payment-methods/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.paymentMethod.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.payment-methods.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.payment-methods.index") }}">
+                                    {{ trans('cruds.paymentMethod.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('transaction_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.transactions.index") }}"
-                                   class="nav-link {{ request()->is('admin/transactions') || request()->is('admin/transactions/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.transaction.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.transactions.*')  ? 'active' : '' }}">
+                                <a href="{{ route("admin.transactions.index") }}">
+                                    {{ trans('cruds.transaction.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('cart_item_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.cart-items.index") }}"
-                                   class="nav-link {{ request()->is('admin/cart-items') || request()->is('admin/cart-items/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-bars">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.cartItem.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.cart-items.*')  ? 'active' : '' }}">
+                                <a href="{{ route("admin.cart-items.index") }}">
+                                    {{ trans('cruds.cartItem.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('cart_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.carts.index") }}"
-                                   class="nav-link {{ request()->is('admin/carts') || request()->is('admin/carts/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cart-arrow-down">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.cart.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.carts.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.carts.index") }}">
+                                    {{ trans('cruds.cart.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('option_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/currencies*') ? 'menu-open' : '' }} {{ request()->is('admin/settings*') ? 'menu-open' : '' }} {{ request()->is('admin/sliders*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-bicycle">
-
-                        </i>
-                        <p>
-                            {{ trans('cruds.option.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#options"
+                       data-toggle="collapse"
+                       aria-expanded="{{ request()->routeIs('admin.currencies.*') || request()->routeIs('admin.settings.*') || request()->routeIs('admin.sliders.*') ? 'true' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-bicycle"></i>
+                            <span>{{ trans('cruds.option.title') }}</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{ request()->routeIs('admin.currencies.*') || request()->routeIs('admin.settings.*') || request()->routeIs('admin.sliders.*') ? 'show' : '' }}"
+                        id="options">
                         @can('currency_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.currencies.index") }}"
-                                   class="nav-link {{ request()->is('admin/currencies') || request()->is('admin/currencies/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-cogs">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.currency.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.currencies.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.currencies.index") }}">
+                                    {{ trans('cruds.currency.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('setting_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.settings.index") }}"
-                                   class="nav-link {{ request()->is('admin/settings') || request()->is('admin/settings/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-angle-double-right">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.setting.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.settings.index") }}">
+                                    {{ trans('cruds.setting.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('slider_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.sliders.index") }}"
-                                   class="nav-link {{ request()->is('admin/sliders') || request()->is('admin/sliders/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-sliders-h">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.slider.title') }}
-                                    </p>
+                            <li class="{{ request()->routeIs('admin.sliders.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.sliders.index") }}">
+                                    {{ trans('cruds.slider.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('contact_us_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/replies*') ? 'menu-open' : '' }} {{ request()->is('admin/tickets*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fas fa-mobile">
-
-                        </i>
-                        <p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#contact"
+                       data-toggle="collapse"
+                       aria-expanded="{{ request()->routeIs('admin.replies.*') || request()->routeIs('admin.tickets.*') ? 'true' : 'false' }}">
+                        <div>
+                            <i class="fa-fw nav-icon fas fa-mobile"></i>
                             {{ trans('cruds.contactUs.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="submenu list-unstyled collapse {{ request()->routeIs('admin.replies.*') || request()->routeIs('admin.tickets.*') ? 'show' : '' }}"
+                        id="contact">
                         @can('reply_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.replies.index") }}"
-                                   class="nav-link {{ request()->is('admin/replies') || request()->is('admin/replies/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-reply">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.reply.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.replies.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.replies.index") }}">
+                                    {{ trans('cruds.reply.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('ticket_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.tickets.index") }}"
-                                   class="nav-link {{ request()->is('admin/tickets') || request()->is('admin/tickets/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-ticket-alt">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.ticket.title') }}
-                                    </p>
+                            <li class="{{request()->routeIs('admin.tickets.*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.tickets.index") }}">
+                                    {{ trans('cruds.ticket.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
+
             @can('cm_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/cms-categories*') ? 'menu-open' : '' }} {{ request()->is('admin/cms-pages*') ? 'menu-open' : '' }}">
-                    <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="fa-fw nav-icon fab fa-trello">
-
-                        </i>
-                        <p>
+                <li class="menu">
+                    <a class="dropdown-toggle collapse"
+                       href="#cms"
+                       data-toggle="collapse"
+                       aria-expanded="{{request()->routeIs('admin.cms-categories.*') || request()->routeIs('admin.cms-pages.*') ? 'true' : 'false'}}">
+                        <div>
+                            <i class="fa-fw nav-icon fab fa-trello"></i>
                             {{ trans('cruds.cm.title') }}
-                            <i class="right fa fa-fw fa-angle-left nav-icon"></i>
-                        </p>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul id="cms"
+                        class="submenu list-unstyled collapse {{request()->routeIs('admin.cms-categories.*') || request()->routeIs('admin.cms-pages.*') ? 'show' : ''}}">
                         @can('cms_category_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.cms-categories.index") }}"
-                                   class="nav-link {{ request()->is('admin/cms-categories') || request()->is('admin/cms-categories/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-bookmark">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.cmsCategory.title') }}
-                                    </p>
+                            <li class="{{request()->is('admin/cms-categories') || request()->is('admin/cms-categories/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.cms-categories.index") }}">
+                                    {{ trans('cruds.cmsCategory.title') }}
                                 </a>
                             </li>
                         @endcan
                         @can('cms_page_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.cms-pages.index") }}"
-                                   class="nav-link {{ request()->is('admin/cms-pages') || request()->is('admin/cms-pages/*') ? 'active' : '' }}">
-                                    <i class="fa-fw nav-icon fas fa-bookmark">
-
-                                    </i>
-                                    <p>
-                                        {{ trans('cruds.cmsPage.title') }}
-                                    </p>
+                            <li class="{{request()->is('admin/cms-pages') || request()->is('admin/cms-pages/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.cms-pages.index") }}">
+                                    {{ trans('cruds.cmsPage.title') }}
                                 </a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endcan
-            @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
+
+            @if(file_exists(app_path('Http/Controllers/Admin/Auth/ChangePasswordController.php')))
                 @can('profile_password_edit')
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'active' : '' }}"
+                    <li class="menu">
+                        <a class="dropdown-toggle collapse"
                            href="{{ route('profile.password.edit') }}">
-                            <i class="fa-fw fas fa-key nav-icon">
-                            </i>
-                            <p>
+                            <div>
+                                <i class="fa-fw fas fa-key nav-icon"></i>
                                 {{ trans('global.change_password') }}
-                            </p>
+                            </div>
                         </a>
                     </li>
                 @endcan
             @endif
-            <li class="nav-item">
-                <a href="#" class="nav-link"
+            <li class="menu">
+                <a href="#" class="collapse dropdown-toggle"
                    onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                    <p>
-                        <i class="fas fa-fw fa-sign-out-alt nav-icon">
-
-                        </i>
-                    <p>{{ trans('global.logout') }}</p>
-                    </p>
+                    <div>
+                        <i class="fas fa-fw fa-sign-out-alt nav-icon"></i>
+                        {{ trans('global.logout') }}
+                    </div>
                 </a>
             </li>
-
-
         </ul>
-        <!-- <div class="shadow-bottom"></div> -->
-
     </nav>
-
 </div>

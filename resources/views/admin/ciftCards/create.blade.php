@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.cift-cards.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.gift-cards.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label class="required" for="code">{{ trans('cruds.ciftCard.fields.code') }}</label>

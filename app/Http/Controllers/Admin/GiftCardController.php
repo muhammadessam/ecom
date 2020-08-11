@@ -9,10 +9,9 @@ use App\Http\Requests\MassDestroyCiftCardRequest;
 use App\Http\Requests\StoreCiftCardRequest;
 use App\Http\Requests\UpdateCiftCardRequest;
 use Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CiftCardController extends Controller
+class GiftCardController extends Controller
 {
     public function index()
     {
@@ -36,41 +35,41 @@ class CiftCardController extends Controller
     {
         $ciftCard = CiftCard::create($request->all());
 
-        return redirect()->route('admin.cift-cards.index');
+        return redirect()->route('admin.gift-cards.index');
     }
 
-    public function edit(CiftCard $ciftCard)
+    public function edit(CiftCard $giftCard)
     {
         abort_if(Gate::denies('cift_card_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $categories = GiftsCategory::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $ciftCard->load('category');
+        $giftCard->load('category');
 
-        return view('admin.ciftCards.edit', compact('categories', 'ciftCard'));
+        return view('admin.ciftCards.edit', compact('categories', 'giftCard'));
     }
 
-    public function update(UpdateCiftCardRequest $request, CiftCard $ciftCard)
+    public function update(UpdateCiftCardRequest $request, CiftCard $giftCard)
     {
-        $ciftCard->update($request->all());
+        $giftCard->update($request->all());
 
-        return redirect()->route('admin.cift-cards.index');
+        return redirect()->route('admin.gift-cards.index');
     }
 
-    public function show(CiftCard $ciftCard)
+    public function show(CiftCard $giftCard)
     {
         abort_if(Gate::denies('cift_card_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ciftCard->load('category');
+        $giftCard->load('category');
 
-        return view('admin.ciftCards.show', compact('ciftCard'));
+        return view('admin.ciftCards.show', compact('giftCard'));
     }
 
-    public function destroy(CiftCard $ciftCard)
+    public function destroy(CiftCard $giftCard)
     {
         abort_if(Gate::denies('cift_card_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $ciftCard->delete();
+        $giftCard->delete();
 
         return back();
     }

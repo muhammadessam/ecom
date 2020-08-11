@@ -9,7 +9,7 @@
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.cift-cards.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.gift-cards.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -20,7 +20,7 @@
                             {{ trans('cruds.ciftCard.fields.id') }}
                         </th>
                         <td>
-                            {{ $ciftCard->id }}
+                            {{ $giftCard->id }}
                         </td>
                     </tr>
                     <tr>
@@ -28,7 +28,7 @@
                             {{ trans('cruds.ciftCard.fields.code') }}
                         </th>
                         <td>
-                            {{ $ciftCard->code }}
+                            {{ $giftCard->code }}
                         </td>
                     </tr>
                     <tr>
@@ -36,7 +36,7 @@
                             {{ trans('cruds.ciftCard.fields.category') }}
                         </th>
                         <td>
-                            {{ $ciftCard->category->name ?? '' }}
+                            {{ $giftCard->category->name ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                             {{ trans('cruds.ciftCard.fields.amount') }}
                         </th>
                         <td>
-                            {{ $ciftCard->amount }}
+                            {{ $giftCard->amount }}
                         </td>
                     </tr>
                     <tr>
@@ -52,13 +52,13 @@
                             {{ trans('cruds.ciftCard.fields.message') }}
                         </th>
                         <td>
-                            {{ $ciftCard->message }}
+                            {{ $giftCard->message }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.cift-cards.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.gift-cards.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
